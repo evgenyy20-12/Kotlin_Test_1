@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Lesson_14</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.kt</span></div><h1>Main.kt</h1><pre class="source lang-java linenums">fun main() {
+<span class="nc" id="L2">    val cardType = &quot;Mastercard&quot;</span>
+<span class="nc" id="L3">    commission(cardType)</span>
+<span class="nc" id="L4">}</span>
+
+fun commission(cardType: String):Int {
+<span class="fc" id="L7">    val transferAmount = 150000</span>
+<span class="fc" id="L8">    val amountOfPreviousTransfers = 0</span>
+<span class="pc bpc" id="L9" title="1 of 4 branches missed.">    return when (cardType) {</span>
+<span class="nc" id="L10">        &quot;Vk Pay&quot; -&gt; vkPay(transferAmount, amountOfPreviousTransfers)</span>
+<span class="fc" id="L11">        &quot;Mastercard&quot;, &quot;Maestro&quot; -&gt; mastercardMaestro(transferAmount)</span>
+<span class="fc" id="L12">        &quot;Visa&quot;, &quot;РњРёСЂ&quot; -&gt; visaMir(transferAmount)</span>
+<span class="fc" id="L13">        else -&gt; 0</span>
+    }
+}
+
+fun vkPay(transferAmount: Int, amountOfPreviousTransfers: Int):Int {
+<span class="pc bpc" id="L18" title="1 of 4 branches missed.">    if (transferAmount / 100 &lt;= 15000 &amp;&amp; amountOfPreviousTransfers / 100 &lt;= 40000) {</span>
+<span class="fc" id="L19">        return 1</span>
+    } else {
+<span class="fc" id="L21">        return 0</span>
+    }
+}
+
+fun mastercardMaestro(transferAmount: Int):Int {
+<span class="fc" id="L26">    val commission = 0.6</span>
+<span class="fc" id="L27">    val commissionForTranslation = transferAmount * commission + 2000</span>
+<span class="fc" id="L28">    return when (transferAmount) {</span>
+<span class="pc bpc" id="L29" title="1 of 6 branches missed.">        in 300..75000 -&gt; 1</span>
+<span class="fc" id="L30">        else -&gt; commissionForTranslation.toInt()</span>
+    }
+}
+
+fun visaMir(transferAmount: Int):Int {
+<span class="fc" id="L35">    val commission = 0.75</span>
+<span class="fc" id="L36">    val minimumCommission = 3500</span>
+<span class="fc" id="L37">    val commissionForTranslation = transferAmount * commission</span>
+<span class="fc" id="L38">    var cardTransferCommission = 0</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    if (commissionForTranslation &lt; minimumCommission) {</span>
+<span class="fc" id="L40">        cardTransferCommission = minimumCommission;</span>
+    } else {
+<span class="fc" id="L42">        cardTransferCommission = commissionForTranslation.toInt()</span>
+    }
+<span class="fc" id="L44">    return cardTransferCommission</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
